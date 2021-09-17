@@ -9,9 +9,9 @@
 </head>
 
 <body>
-    <form method="post" action="gravaDisciplina.php">
-        <label for="Disciplina">Nome da Disciplina:</label>
-        <input type="text" id="disciplina" name="disciplina" autocomplete="off"><br><br>
+    <form method="post" action="gravaDisciplinaBD.php">
+        <label for="nome">Nome da Disciplina:</label>
+        <input type="text" id="nome" name="nome" autocomplete="off"><br><br>
         <label for="professor">Nome do Professor:</label>
         <input type="text" id="professor" name="professor" autocomplete="off"><br><br>
         <label for="Disciplina">Dia da Disciplina:</label>
@@ -20,6 +20,8 @@
         <input type="text" id="descricao" name="descricao" autocomplete="off"><br><br>
         <input type="submit" value="salvar">
     </form>
+    <br><br>
+    <a href="recebeComGet.php">Enviar dado com get</a>
 </body>
 
 </html>
