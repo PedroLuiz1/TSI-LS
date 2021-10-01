@@ -10,13 +10,29 @@ $bd_pass = '';
 $bd = new PDO($bd_dsn, $bd_user, $bd_pass);
 
 $sql = 'SELECT 
-            nome, professor, dia, descricao
+           id, nome, professor, dia, descricao
         FROM
             disciplinas';
 
-echo '<table border="1">
+$_GET['apagado'] = $_GET['apagado'] ?? false;           
+  
+if($_GET['apagado'] == 1) {
+    echo "<font color = green> Apagado com sucesso</font>";
+}
+
+$_GET['gravado'] = $_GET['gravado'] ?? false;
+
+if($_GET['gravado'] == 1) {
+    echo "<font color = green> Gravado com sucesso</font>";
+} 
+
+
+
+echo '  <a href="disciplina.html">Adicionar Disciplina</a><br>
+        <form action ="apagarDisciplina.php" method="post">
+        <table border="1">
         <tr>
-            <td>Nome</td><td>Prrofessor</td><td>Dia</td><td>Descricao</td>
+            <th>Nome</th><th>Professor</th><th>Dia</th><th>Descricao</th><th>Ações</th>
         <tr>';
 
 foreach($bd->query($sql) as $registro) {
@@ -24,8 +40,9 @@ foreach($bd->query($sql) as $registro) {
                 <td>{$registro['nome']}</td>
                 <td>{$registro['professor']}</td>
                 <td>{$registro['dia']}</td>
-                <td>{$registro['descricao']}</td>     
+                <td>{$registro['descricao']}</td>
+                <td><button name='apagar' value='{$registro['id']}'>apagar</button><td>     
            </tr>";                 
 }
-
-echo '</table>';
+echo '</table>
+    </form>';

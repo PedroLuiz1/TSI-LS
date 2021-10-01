@@ -40,7 +40,7 @@ $valores[':end_ip'] = $_SERVER['REMOTE_ADDR'];
 
 //Executamos a consulta SQL
 if($stmt->execute($valores)){
-    echo "<br><br>dados inseridos com sucesso";
+    header('Location: listar.php?gravado=1');
 } else {
     echo "<br><br> Erro, Nao consegui gravar no banco";
 }
