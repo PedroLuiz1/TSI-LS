@@ -3,15 +3,10 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
+require_once('banco/conecta.php');
+
 //Inicializo a sessao
 session_start();
-
-$bd_dsn = 'mysql:host=localhost;port=3306;dbname=ling_serv';
-$bd_user = 'root';
-$bd_pass = '';
-
-//Conectamos com o Banco MySQL
-$bd = new PDO($bd_dsn, $bd_user, $bd_pass);
 
 //preparamos a consulta no banco buscando o usuario
 $stmt = $bd->prepare('SELECT id, nome, senha FROM usuarios WHERE email = :email');
@@ -32,9 +27,12 @@ if($registro) {
         $_SESSION['nome'] = $registro['nome'];
         $_SESSION['id'] = $registro['id'];
         
-        echo 'Menu: <a href="index.php">Colegas</a> <br><br>
-                    <form method="post" action="sair.php"><button>Sair</button></form>';
+        include('telas/header.tela.php');
+        include('telas/menu.tela.php');
+        include('telas/footer.tela.php');
+
     }else {
+
         //se errar a senha, eu destruo a sessao
         session_destroy();
 
@@ -42,7 +40,9 @@ if($registro) {
     }
 
 }else{
+
+    //se nao existir o usuario com o email fornecido, destruo a sessao
     session_destroy();
 
-    echo "Credenciais invalidas";
+    echo "Credenciais invalidas<br> <a href='login.html'>Tente novamente</a>";
 }
